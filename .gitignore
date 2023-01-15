@@ -1,0 +1,4 @@
+.idea
+/nginx/logs
+/mysql/data
+/.env
