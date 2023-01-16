@@ -19,4 +19,4 @@
     └── mysql:8.0
 
 ## API Spec
-    - zircote/swagger-php 패키지를 통한 Swagger 문서
+- zircote/swagger-php 패키지를 활용한 Swagger 문서

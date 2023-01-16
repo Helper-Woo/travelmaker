@@ -7,9 +7,7 @@ RUN apt-get install -y curl
 RUN apt-get install -y \
     zip
 
-# node 18.x install
-RUN curl -sL https://deb.nodesource.com/setup_18.x
-RUN apt install -y nodejs
+RUN docker-php-ext-install pdo_mysql
 
 # Composer install
 RUN curl -sS https://getcomposer.org/installer | php

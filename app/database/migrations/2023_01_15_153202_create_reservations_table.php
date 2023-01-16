@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->tinyInteger('status')->default('0'); // 예약상태 - 0:신청,1:확정,2:거절(반려)
             $table->timestamps();
+        });
+
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Room::class)->constrained('rooms'); // 객실 id
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('reservations');
     }
 };
