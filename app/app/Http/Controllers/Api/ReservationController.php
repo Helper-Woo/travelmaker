@@ -67,7 +67,7 @@ class ReservationController extends Controller
     {
         try {
             $validate = Validator::make($request->all(), [
-                'hotelId' => ['required', 'string'],
+                'hotelId' => ['required', 'integer'],
             ]);
 
             if ($validate->fails()) {
