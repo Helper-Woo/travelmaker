@@ -15,12 +15,10 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Hotel::class)->constrained('hotels'); // 호텔 id
+            $table->foreignIdFor(\App\Models\Room::class)->nullable()->constrained('rooms'); // 객실 id
             $table->tinyInteger('status')->default('0'); // 예약상태 - 0:신청,1:확정,2:거절(반려)
             $table->timestamps();
-        });
-
-        Schema::table('reservations', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Room::class)->constrained('rooms'); // 객실 id
         });
     }
 

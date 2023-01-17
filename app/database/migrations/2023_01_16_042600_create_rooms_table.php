@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-        });
-
-        Schema::table('rooms', function (Blueprint $table) {
             $table->foreignIdFor(\App\Models\Hotel::class)->constrained('hotels'); // 호텔 id
+            $table->timestamps();
         });
     }
 

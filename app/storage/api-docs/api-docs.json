@@ -1,0 +1,254 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hotel System",
+        "description": "Hotel System",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "localhost"
+        }
+    ],
+    "paths": {
+        "/api/hotel": {
+            "get": {
+                "tags": [
+                    "hotel"
+                ],
+                "summary": "호텔 목록",
+                "description": "호텔 목록을 조회한다",
+                "operationId": "findHotel",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Hotel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "hotel"
+                ],
+                "summary": "호텔 등록",
+                "description": "호텔을 등록한다",
+                "operationId": "storeHotel",
+                "requestBody": {
+                    "description": "호텔 등록 object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "호텔명",
+                                        "type": "string",
+                                        "example": "호텔명"
+                                    },
+                                    "roomCnt": {
+                                        "description": "객실수",
+                                        "type": "integer",
+                                        "example": 10
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/reservation": {
+            "get": {
+                "tags": [
+                    "reservation"
+                ],
+                "summary": "예약 목록",
+                "description": "예약 목록을 조회한다",
+                "operationId": "findReservation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reservation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "reservation"
+                ],
+                "summary": "예약 신청",
+                "description": "예약을 신청한다",
+                "operationId": "storeReservation",
+                "requestBody": {
+                    "description": "예약 신청 object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "hotelId": {
+                                        "description": "호텔id",
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/reservation/{id}": {
+            "patch": {
+                "tags": [
+                    "reservation"
+                ],
+                "summary": "예약 수정",
+                "description": "예약을 수정한다",
+                "operationId": "updateReservation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "예약id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "예약 수정 object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "description": "예약상태(0:신청,1:확정,2:반려)",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Hotel": {
+                "properties": {
+                    "id": {
+                        "description": "호텔id",
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    "name": {
+                        "description": "호텔명",
+                        "type": "string",
+                        "format": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Reservation": {
+                "properties": {
+                    "id": {
+                        "description": "예약id",
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    "hotelId": {
+                        "description": "호텔id",
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    "roomId": {
+                        "description": "객실id",
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    "status": {
+                        "description": "상태(0:신청,1:확정,2:반려)",
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Room": {
+                "properties": {
+                    "id": {
+                        "description": "객실id",
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    "hotelId": {
+                        "description": "호텔id",
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "hotel",
+            "description": "호텔 API"
+        },
+        {
+            "name": "reservation",
+            "description": "예약 API"
+        }
+    ]
+}
