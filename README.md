@@ -22,22 +22,30 @@
     └── mysql:8.0
 ```
 
+## 실행
+```
+    $ docker-compose up -d
+```
+
 ## API 문서
 - darkaonline/l5-swagger 패키지를 활용한 Swagger 문서에 기술
 - [Swagger 문서](http://localhost/api/doc)
 ```
-- L5-Swagger 구성
-$ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
-
-- L5-Swagger 생성
-$ php artisan l5-swagger:generate
+    - L5-Swagger 구성
+    $ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+    
+    - L5-Swagger 생성
+    $ php artisan l5-swagger:generate
+    
+    - Swagger UI path
+    /api/doc
 ``` 
 
 ## API 목록
 ```
-- 호텔 목록: [GET] /api/hotel
-- 호텔 등록: [POST] /api/hotel
-- 예약 목록: [GET] /api/reservation
-- 예약 등록: [POST] /api/reservation
-- 예약 수정: [PATCH] /api/reservation/{id}
+    - 호텔 목록: [GET] /api/hotel
+    - 호텔 등록: [POST] /api/hotel
+    - 예약 목록: [GET] /api/reservation
+    - 예약 등록: [POST] /api/reservation
+    - 예약 수정: [PATCH] /api/reservation/{id}
 ```
